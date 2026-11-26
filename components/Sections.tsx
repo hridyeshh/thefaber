@@ -75,10 +75,7 @@ export function Proof() {
   const card = (q: (typeof QUOTES)[number], i: number) => (
     <figure key={q.text} className={i % 3 === 1 ? "quote quote-cream" : "quote"}>
       <blockquote>“{q.text}”</blockquote>
-      <figcaption>
-        <b>{q.who}</b>
-        <span>{q.role}</span>
-      </figcaption>
+      <figcaption>{q.who}</figcaption>
     </figure>
   );
   return (
@@ -92,9 +89,9 @@ export function Proof() {
           </span>
         </h2>
         <p>
-          What people say after
+          What people say about
           <br />
-          we&apos;ve worked together.
+          the apps we&apos;ve built.
         </p>
       </div>
       <Marquee>{QUOTES.slice(0, half).map(card)}</Marquee>

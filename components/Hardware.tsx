@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type MotionValue, useAnimationFrame, useMotionValue, useScroll, useTransform, useVelocity } from "motion/react";
-import { type ComponentProps, type ReactNode, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import art from "@/lib/art.json";
 import { BUTTERFLY_PARTS, DESKY_SETS, HARDWARE, KEYCHAIN_PARTS } from "@/lib/content";
 import { drawWorld, PH, PW } from "@/lib/pixel";
@@ -9,7 +9,7 @@ import { useChapter, useViewport } from "@/lib/story";
 import { at, bezier, length, mix, type Pt, type Range, seg, stops, tipped } from "@/lib/stops";
 import { DeskyModel, deskyGeometry, Widget } from "./Desky";
 import { Adxl345, Esp32C3, KEY_RING, KEYCHAIN, KeyBack, KeyBattery, KeyBoard, KeyFront, KeyScreen, Lipo, Sg90 } from "./parts";
-import { Callout, Chapter, pct } from "./ui";
+import { Callout, Chapter, HwTag, pct } from "./ui";
 
 const BEATS = [
   ["in", 1],
@@ -316,7 +316,7 @@ export function HardwareChapter() {
           </motion.div>
         </motion.div>
       </div>
-      <HwCard which="butterfly" style={{ opacity: bCard, pointerEvents: bEvents }}>
+      <HwTag hw={HARDWARE.butterfly} className="hw-card" style={{ opacity: bCard, pointerEvents: bEvents }}>
         <p className="hint">
           <span className="on-hover">Move your cursor. The wings follow.</span>
           <span className="on-touch">Drag your finger. The wings follow.</span>
@@ -332,8 +332,8 @@ export function HardwareChapter() {
             z <motion.span>{az}</motion.span>
           </span>
         </p>
-      </HwCard>
-      <HwCard which="keychain" style={{ opacity: kCard }} />
+      </HwTag>
+      <HwTag hw={HARDWARE.keychain} className="hw-card" style={{ opacity: kCard }} />
       <motion.p className="key-caption" style={{ opacity: caption }}>
         <span className="tape">A pixel cat lives in here.</span>
       </motion.p>
@@ -370,25 +370,6 @@ function KeyCallout({ i, part, p, x3 }: { i: number; part: (typeof KEYCHAIN_PART
   const x = useTransform(() => x3.get().calls[i].x);
   const y = useTransform(() => x3.get().calls[i].y);
   return <Callout n={i + 1} title={part.title} detail={part.detail} style={{ x, y, opacity }} />;
-}
-
-function HwCard({ which, style, children }: { which: "butterfly" | "keychain"; style: ComponentProps<typeof motion.aside>["style"]; children?: ReactNode }) {
-  const hw = HARDWARE[which];
-  return (
-    <motion.aside className="hw-card card" style={style}>
-      <p className="eyebrow">
-        Hardware {hw.n} · <span className="status">{hw.status}</span>
-      </p>
-      <h2 className="card-title">{hw.name}</h2>
-      <p>{hw.line}</p>
-      <ul className="chips">
-        {hw.specs.map((s) => (
-          <li key={s}>{s}</li>
-        ))}
-      </ul>
-      {children}
-    </motion.aside>
-  );
 }
 
 function PixelWorld() {

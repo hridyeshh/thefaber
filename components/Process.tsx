@@ -60,7 +60,7 @@ function Folder({ step, i, p, range }: { step: (typeof STEPS)[number]; i: number
               </span>
             ))}
           </p>
-          <p>
+          <p className="folder-close">
             {step.close.map((l) => (
               <span key={l}>
                 {l}

@@ -2,6 +2,7 @@
 
 import { type CSSProperties, type ReactNode, type RefObject, useEffect, useState } from "react";
 import { motion, type MotionStyle, type MotionValue, useMotionValueEvent, useScroll, useTransform } from "motion/react";
+import { HARDWARE } from "@/lib/content";
 import { rand } from "@/lib/pixel";
 
 /**
@@ -118,6 +119,49 @@ export function Marquee({ children, reverse }: { children: ReactNode; reverse?: 
 }
 
 export const pct = (f: number) => `${f * 100}%`;
+
+/** A piece of hardware's workshop tag: punched, typed, and stamped with where it's at. */
+export function HwTag({
+  hw,
+  className,
+  style,
+  children,
+}: {
+  hw: (typeof HARDWARE)[keyof typeof HARDWARE];
+  className: string;
+  style: MotionStyle;
+  children?: ReactNode;
+}) {
+  return (
+    <motion.aside className={`tag ${className}`} style={style}>
+      <div className="tag-head">
+        <p className="tag-no">No. {hw.n}</p>
+        <p className={hw.status === "Working" ? "stamp stamp-ok" : "stamp"}>{hw.status}</p>
+      </div>
+      <h2 className="tag-name">{hw.name}</h2>
+      <p>{hw.line}</p>
+      {"can" in hw && (
+        <div className="tag-can">
+          <p className="tag-label">It shows</p>
+          <ul>
+            {hw.can.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div className="tag-parts">
+        <p className="tag-label">Parts</p>
+        <ul>
+          {hw.specs.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+      </div>
+      {children}
+    </motion.aside>
+  );
+}
 
 /**
  * An engineering callout: a numbered dot on the part, a leader line, and what it is.

@@ -10,19 +10,19 @@ const sans = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-sans", 
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 const description =
-  "Websites and internet branding for founders and local businesses, from a two-person studio in Bengaluru that ships real products: web apps, a browser extension and hardware.";
+  "Websites and internet branding for founders and local businesses, from a studio that ships real products: web apps, a browser extension and hardware.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "thelocalcode — websites and branding",
+  title: "thefaber — websites and branding",
   description,
-  openGraph: { title: "thelocalcode", description, images: ["/art/mac.webp"] },
+  openGraph: { title: "thefaber", description, images: ["/art/mac.webp"] },
 };
 
 const LD = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "thelocalcode",
+  name: "thefaber",
   description,
   areaServed: "IN",
 };
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <header className="nav">
           <a href="#top" className="nav-logo">
-            thelocalcode
+            thefaber
           </a>
           <nav className="nav-links" aria-label="Sections">
             <a href="#work">Work</a>

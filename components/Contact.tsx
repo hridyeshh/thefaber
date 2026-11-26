@@ -82,10 +82,10 @@ export function Contact() {
       </div>
       <div className="footer">
         <p className="wordmark" aria-hidden>
-          thelocalcode
+          thefaber
         </p>
         <div className="footer-row">
-          <span>© {new Date().getFullYear()} thelocalcode</span>
+          <span>© {new Date().getFullYear()} thefaber</span>
           <span>Websites · Branding · Hardware</span>
         </div>
       </div>

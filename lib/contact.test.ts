@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseContact } from "./contact.ts";
+import { parseContact, toRow } from "./contact.ts";
 
 const form = (fields: Record<string, string>) => {
   const f = new FormData();
   for (const [k, v] of Object.entries(fields)) f.set(k, v);
   return f;
 };
-const good = { name: "Asha", reach: "asha@example.com", need: "A website", message: "A site for my bakery." };
+const good = { name: "Asha", reach: "asha@example.com", need: "A website" as const, message: "A site for my bakery." };
 
 test("accepts an enquiry with an email or a phone number", () => {
   assert.deepEqual(parseContact(form(good)), { ok: true, data: good });
@@ -20,6 +20,11 @@ test("rejects what it can't reply to or doesn't know", () => {
     const r = parseContact(form({ ...good, ...bad }));
     assert.ok("ok" in r && !r.ok, JSON.stringify(bad));
   }
+});
+
+test("keeps sheet cells as text, never formulas", () => {
+  const row = toRow({ ...good, name: '=IMPORTXML("http://x.example")', reach: "+91 98765 43210" });
+  assert.deepEqual(row, [`'=IMPORTXML("http://x.example")`, "'+91 98765 43210", "A website", "A site for my bakery."]);
 });
 
 test("flags the honeypot as spam", () => {

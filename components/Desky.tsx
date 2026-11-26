@@ -8,7 +8,7 @@ import { at, length, mix, seg, stops, tipped, type Range } from "@/lib/stops";
 import { introType } from "./Mac";
 import { DESKY, DeskyBoard, DeskyDisplays, DeskyPanel, DeskyShell, DeskySignal } from "./parts";
 import { DeskyIcon, type DeskyWidget, PixelPet } from "./svg";
-import { Callout, Chapter, pct, usePast } from "./ui";
+import { Callout, Chapter, HwTag, pct, usePast } from "./ui";
 
 const BEATS = [
   ["intro", 0.8],
@@ -175,19 +175,7 @@ export function DeskyChapter() {
           </div>
         </motion.div>
       </div>
-      <motion.aside className="hw-tag card" style={{ opacity: side, pointerEvents: sideEvents }}>
-        <p className="eyebrow">
-          Hardware {HW.n} · <span className="status ok">{HW.status}</span>
-        </p>
-        <h2 className="card-title">{HW.name}</h2>
-        <p>{HW.line}</p>
-        <ul className="chips">
-          {HW.can.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-        <p className="specs">{HW.specs.join(" · ")}</p>
-      </motion.aside>
+      <HwTag hw={HW} className="hw-tag" style={{ opacity: side, pointerEvents: sideEvents }} />
       <motion.div className="phone-wrap" style={{ opacity: side }} aria-hidden>
         <Phone p={p} />
       </motion.div>
@@ -318,19 +306,32 @@ function SiteCard({ site, i, p, enter, hold }: { site: (typeof SITES)[number]; i
   const o = useTransform(p, [at(enter, 0.6), enter[1], at(hold, 0.85), hold[1]], [0, 1, 1, 0]);
   const x = useTransform(p, [at(enter, 0.6), enter[1]], ["-3vw", "0vw"]);
   const events = useTransform(o, (v) => (v > 0.5 ? "auto" : "none"));
+  const host = new URL(site.url).hostname.replace("www.", "");
+  // Each site opens as a window on the computer from the story, Finder status bar and all.
   return (
-    <motion.aside className="site-card card" style={{ opacity: o, x, pointerEvents: events }}>
-      <p className="eyebrow">Website {i + 1} of 3</p>
-      <h2 className="card-title">{site.name}</h2>
-      <p>{site.line}</p>
-      <ul className="chips">
-        {site.did.map((d) => (
-          <li key={d}>{d}</li>
-        ))}
-      </ul>
-      <a className="btn btn-ink" href={site.url} target="_blank" rel="noopener">
-        Visit {new URL(site.url).hostname.replace("www.", "")} ↗
-      </a>
+    <motion.aside className="site-card window" style={{ opacity: o, x, pointerEvents: events }}>
+      <p className="window-bar" aria-hidden>
+        <span className="window-close" />
+        <span className="window-title">{host}</span>
+      </p>
+      <div className="site-body">
+        <h2 className="site-name">{site.name}</h2>
+        <p>{site.line}</p>
+        <ul className="site-did" aria-label="What we made">
+          {site.did.map((d) => (
+            <li key={d}>{d}</li>
+          ))}
+        </ul>
+        <a className="mac-btn" href={site.url} target="_blank" rel="noopener">
+          Open {host}
+        </a>
+      </div>
+      <p className="window-status" aria-hidden>
+        <span>{site.did.length} items</span>
+        <span>
+          {i + 1} of {SITES.length}
+        </span>
+      </p>
     </motion.aside>
   );
 }
@@ -344,7 +345,7 @@ export function Widget({ name }: { name: DeskyWidget }) {
       return (
         <div className="w">
           <p className="w-row">
-            <span className="w-label">BENGALURU</span>
+            <span className="w-label">HOME</span>
             <span className="w-warm">37″</span>
           </p>
           <div className="w-hero">
@@ -361,7 +362,7 @@ export function Widget({ name }: { name: DeskyWidget }) {
     case "weather":
       return (
         <div className="w">
-          <p className="w-label">BANGALORE</p>
+          <p className="w-label">TODAY</p>
           <div className="w-hero">
             <span className="w-sun" aria-hidden />
             <b className="w-big">28°</b>

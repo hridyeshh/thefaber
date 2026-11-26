@@ -88,7 +88,7 @@ function Still() {
             <span className="tape">by {STUDIO}.</span>
           </h1>
           <p>
-            Getting a website is easy. Getting one people trust is hard. We are a studio of two in Bengaluru: we design brands and build fast
+            Getting a website is easy. Getting one people trust is hard. We are a studio of two: we design brands and build fast
             websites for founders and local businesses.
           </p>
           <a className="btn btn-ink" href="#contact">

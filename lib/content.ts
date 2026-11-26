@@ -1,6 +1,6 @@
 // Every word on the site lives here. Edit copy here, not in the components.
 
-export const STUDIO = "thelocalcode";
+export const STUDIO = "thefaber";
 
 /** The line the camera dives into on the computer's screen, and Desky's chapter opens on. */
 export const INTRO = "Here's what we've built";
@@ -24,7 +24,7 @@ export const SITES = [
     slug: "circuitsupport",
     name: "CircuitSupport",
     url: "https://www.circuitsupport.com",
-    line: "3D printing, project kits and CAD help for engineering students in Bengaluru.",
+    line: "3D printing, project kits and CAD help for engineering students.",
     did: ["Storefront", "Order flow", "Brand", "SEO"],
   },
 ] as const;
@@ -174,12 +174,14 @@ export const PLANS = {
   ],
 } as const;
 
-// PLACEHOLDERS: swap these for real client quotes before launch, or remove <Proof />.
+// What people who use our apps told us. Half go on each row of the marquee, so keep the apps mixed.
 export const QUOTES = [
-  { text: "Our customers keep asking which agency we hired.", who: "Client name", role: "Café owner" },
-  { text: "They understood the business in one call.", who: "Client name", role: "Founder" },
-  { text: "Finally a website I'm proud to send people to.", who: "Client name", role: "Studio owner" },
-  { text: "Enquiries now land on WhatsApp, straight from the site.", who: "Client name", role: "Clinic manager" },
-  { text: "Fast, friendly, and they explain everything.", who: "Client name", role: "Shop owner" },
-  { text: "The new logo alone was worth it.", who: "Client name", role: "Co-founder" },
+  { text: "I don't even read books. The app was so good I made an account anyway.", who: "PaperBoxd user" },
+  { text: "My highlights get filed by topic on their own. That's my favourite feature.", who: "stickynotes user" },
+  { text: "I love it. Rating a book the minute I finish it is my new favourite thing.", who: "PaperBoxd user" },
+  { text: "It's the one extension I've kept pinned.", who: "stickynotes user" },
+  { text: "I've found so many books just by seeing what my friends are reading.", who: "PaperBoxd user" },
+  { text: "I highlight everything now, because I know I'll find it again.", who: "stickynotes user" },
+  { text: "Love the app, love how it looks. It feels made by people who read.", who: "PaperBoxd user" },
+  { text: "The hand-painted pages make me smile every time I open my library.", who: "stickynotes user" },
 ] as const;

@@ -23,3 +23,9 @@ export function parseContact(form: FormData): Parsed {
   if (message.length > 2000) return { ok: false, error: "Keep it under 2000 characters." };
   return { ok: true, data: { name, reach, need: need as Need, message } };
 }
+
+/**
+ * The enquiry as a sheet row. Sheets runs a cell starting with = + - @ as a formula
+ * (and phone numbers start with +), so those get a leading ' to stay plain text.
+ */
+export const toRow = (c: Contact) => [c.name, c.reach, c.need, c.message].map((v) => (/^[=+\-@]/.test(v) ? `'${v}` : v));

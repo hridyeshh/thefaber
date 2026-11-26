@@ -77,7 +77,7 @@ const POSES = {
   ],
 } as const;
 
-/** thelocalcode is two people. This is how the computer draws us. */
+/** thefaber is two people. This is how the computer draws us. */
 export function PixelDuo({ pose, className }: { pose: keyof typeof POSES; className?: string }) {
   const [still, a, b] = POSES[pose];
   return (

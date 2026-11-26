@@ -1,7 +1,8 @@
-/* thelocalcode: Parker-style storytelling. Tokens first; components below use only these. */
+/* thefaber: Parker-style storytelling. Tokens first; components below use only these. */
 :root {
   --cream: #fcf5e2;
   --cream-deep: #f6ecc8;
+  --manila: #ecd8a2;
   --paper: #ffffff;
   --ink: #000000;
   --ink-soft: #1e1e1e;
@@ -129,11 +130,8 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 .card p { margin: 0 0 10px; font-size: 15px; }
 .card-title { font: 500 clamp(28px, 2.8vw, 40px)/1.02 var(--serif); letter-spacing: -0.02em; margin: 0 0 10px; }
 .eyebrow { font: 600 12px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
-.status { padding: 2px 6px; border-radius: 6px; background: var(--yellow); }
-.status.ok { background: var(--mint); }
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 12px 0 14px; }
 .chips li { font: 500 12px/1 var(--mono); padding: 6px 8px; border: 2px solid var(--ink); border-radius: 999px; background: var(--cream); }
-.specs { font: 500 11px/1.4 var(--mono); letter-spacing: 0.04em; color: var(--ink-soft); }
 
 .marquee { overflow: hidden; }
 .marquee-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
@@ -318,6 +316,54 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 .site-card { position: absolute; left: 4vw; top: 52%; translate: 0 -50%; width: min(340px, 27vw); z-index: 5; }
 .hw-card { position: absolute; right: 4vw; top: 52%; translate: 0 -50%; width: min(360px, 29vw); z-index: 5; }
 
+/* a site opens as a window on the computer, with Finder's status bar along the bottom */
+.site-body { display: grid; gap: 12px; padding: 18px 20px 20px; }
+.site-body p { margin: 0; font-size: 15px; line-height: 1.5; }
+.site-name { margin: 0; font: 500 clamp(30px, 2.8vw, 42px)/1 var(--serif); letter-spacing: -0.025em; }
+.site-did { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); font: 500 13px/1 var(--mono); }
+.site-did li { display: flex; align-items: center; gap: 10px; padding: 7px 2px; border-bottom: 1px dotted var(--ink); }
+/* a document icon with its corner folded */
+.site-did li::before { content: ""; flex: none; width: 9px; height: 11px; border: 1.5px solid var(--ink); border-radius: 1px; background: linear-gradient(225deg, var(--ink) 0 3px, var(--paper) 3px); }
+/* the classic default button: a thick ring around a rounded one */
+.mac-btn {
+  justify-self: start; margin: 6px 0 2px 5px; padding: 8px 20px; border: 2px solid var(--ink); border-radius: 9px;
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 5px var(--ink); background: var(--paper); color: var(--ink);
+  font: 650 14px/1 var(--sans); text-decoration: none;
+}
+.mac-btn:hover, .mac-btn:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+.window-status { display: flex; justify-content: space-between; margin: 0; padding: 7px 14px; border-top: var(--line); font: 500 11px/1.2 var(--mono); }
+
+/* hardware wears a workshop tag: manila card, clipped corners, a punched hole, a rubber stamp */
+.tag { --cut: 24px; padding: 40px 22px 20px; color: var(--ink); filter: drop-shadow(4px 5px 0 var(--ink)); rotate: -1.2deg; }
+.tag::before, .tag::after {
+  content: ""; position: absolute; z-index: -1;
+  clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%, 0 var(--cut));
+  mask: radial-gradient(circle at 50% 20px, transparent var(--hole), var(--ink) calc(var(--hole) + 0.5px));
+}
+.tag::before { inset: 0; --hole: 6px; background: var(--ink); }
+/* the manila's hole is wider than the ink's, which leaves a reinforcing ring around it */
+.tag::after { inset: 3px; --cut: 22.8px; --hole: 9px; background: var(--manila); mask-position: 0 -3px; }
+.tag p { margin: 0 0 12px; font-size: 15px; line-height: 1.5; }
+.tag ul { list-style: none; margin: 0; padding: 0; }
+.tag-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.tag-head p { margin: 0; }
+.tag-no { font: 600 12px/1 var(--mono); letter-spacing: 0.06em; }
+.stamp {
+  padding: 5px 9px 4px; border: 2.5px solid currentColor; border-radius: 4px; color: var(--red);
+  font: 800 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; rotate: -5deg; opacity: 0.85; mix-blend-mode: multiply;
+}
+.stamp-ok { color: var(--green); }
+.tag-name { margin: 0 0 10px; font: 500 clamp(30px, 2.8vw, 42px)/1 var(--serif); letter-spacing: -0.025em; }
+.tag-label { margin: 0 0 6px !important; font: 700 11px/1 var(--mono) !important; letter-spacing: 0.1em; text-transform: uppercase; }
+.tag-can { margin-bottom: 14px; }
+.tag-can ul { display: flex; flex-wrap: wrap; gap: 7px 14px; font: 500 12px/1.2 var(--mono); }
+.tag-can li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+/* ticked off, like an inspection list */
+.tag-can li::before { content: "✓"; display: grid; place-items: center; flex: none; width: 12px; height: 12px; border: 1.5px solid var(--ink); font-size: 9px; font-weight: 800; }
+.tag-parts { padding-top: 10px; border-top: 2px dashed var(--ink); }
+.tag-parts ul { font: 500 12px/1.65 var(--mono); }
+.tag .hint { margin: 14px 0 10px; }
+
 /* engineering callouts: a numbered dot on the part, a dashed leader, a label */
 .callout { position: absolute; left: 0; top: 0; margin: 0; display: flex; align-items: center; width: max-content; translate: -15px -50%; pointer-events: none; z-index: 6; }
 .callout-dot { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--yellow); border: var(--line); font: 700 13px/1 var(--mono); }
@@ -364,11 +410,12 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 .folder-green .folder-tab { background: var(--mint); }
 .folder-body {
   position: absolute; inset: 0; background: var(--paper); border-top: 3px dashed var(--ink);
-  display: grid; grid-template-columns: minmax(0, 22vw) minmax(0, 40vw); justify-content: center; align-items: start; gap: 6vw; padding-top: 8svh;
+  display: grid; grid-template-columns: minmax(0, 28vw) minmax(0, 38vw); justify-content: center; align-items: start; gap: 5vw; padding-top: 7svh;
 }
-.folder-copy { padding-top: 1svh; font-size: 17px; line-height: 1.55; }
-.folder-copy p { margin: 0 0 1.3em; }
-.folder-lead { font: 500 clamp(24px, 2.1vw, 32px)/1.1 var(--serif); letter-spacing: -0.02em; }
+.folder-copy { padding-top: 1svh; font-size: clamp(18px, 1.4vw, 23px); line-height: 1.5; }
+.folder-copy p { margin: 0 0 1.1em; }
+.folder-lead { font: 500 clamp(34px, 3.3vw, 56px)/1.02 var(--serif); font-variation-settings: "SOFT" 100, "WONK" 1; letter-spacing: -0.03em; text-wrap: balance; }
+.folder-close { font: italic 430 clamp(21px, 1.7vw, 28px)/1.3 var(--serif); font-variation-settings: "SOFT" 100; letter-spacing: -0.01em; }
 .folder-visual {
   display: grid; place-items: center; aspect-ratio: 16 / 10.5; overflow: hidden;
   border: var(--line); border-radius: 12px; box-shadow: 6px 6px 0 var(--ink);
@@ -378,14 +425,14 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 .check-purple { --c1: var(--purple); --c2: var(--purple-check); }
 .check-green { --c1: var(--mint); --c2: var(--mint-check); }
 /* the little UI inside each folder's picture */
-.mock { width: 76%; padding: clamp(14px, 1.6vw, 24px); background: var(--paper); border-radius: 12px; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55); font: 500 clamp(11px, 0.95vw, 14px)/1.4 var(--sans); }
+.mock { width: 76%; padding: clamp(14px, 1.6vw, 24px); background: var(--paper); border-radius: 12px; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55); font: 500 clamp(13px, 1.1vw, 17px)/1.4 var(--sans); }
 .mock p { margin: 0; }
-.mock-head { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.15em; margin-bottom: 0.9em !important; }
+.mock-head { display: flex; justify-content: space-between; align-items: center; font: 500 1.5em/1.1 var(--serif); letter-spacing: -0.02em; margin-bottom: 0.8em !important; }
 .mock-pill { font: 600 0.75em var(--mono); padding: 0.3em 0.6em; border-radius: 999px; background: var(--cream); border: 1.5px solid var(--ink); }
 .mock-checks { list-style: none; margin: 0 0 1em; padding: 0; display: grid; gap: 0.5em; }
 .mock-checks li::before { content: "✓"; display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; margin-right: 0.6em; border-radius: 50%; background: var(--mint); font-size: 0.8em; font-weight: 800; }
 .mock-notes { display: flex; gap: 0.8em; }
-.sticky { flex: 1; padding: 0.7em 0.8em; font: italic 400 1em/1.3 var(--serif); box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.5); }
+.sticky { flex: 1; padding: 0.7em 0.8em; text-wrap: balance; font: italic 400 1em/1.3 var(--serif); box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.5); }
 .sticky-yellow { background: var(--yellow-check); rotate: -2.5deg; }
 .sticky-pink { background: var(--pink); rotate: 2deg; }
 .mock-brand { display: grid; grid-template-columns: auto 1fr; gap: 1.2em; align-items: center; }
@@ -480,9 +527,8 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 }
 .quote-cream { background: var(--cream); }
 .quote blockquote { margin: 0 0 28px; font: 430 clamp(20px, 1.6vw, 26px)/1.28 var(--serif); letter-spacing: -0.015em; }
-.quote figcaption { display: grid; gap: 4px; }
-.quote figcaption b { font: 700 15px/1.2 var(--sans); }
-.quote figcaption span { font: 600 11px/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.quote figcaption { font: 600 12px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.quote figcaption::before { content: "— "; }
 
 /* cta */
 .cta-left { position: absolute; left: 5vw; top: 15svh; z-index: 3; }
@@ -558,10 +604,11 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
   .problem-right p { margin-bottom: 6px; }
   .desky-anchor { top: 40%; }
   .phone-wrap { display: none; }
-  .site-card, .hw-card, .hw-tag { left: 4vw; right: 4vw; top: auto; bottom: 3svh; translate: none; width: auto; padding: 16px; }
-  .site-card .chips, .hw-card .chips { display: none; }
-  .hw-tag .chips li { padding: 4px 6px; font-size: 11px; }
-  .hw-tag .specs { display: none; }
+  .site-card, .hw-card, .hw-tag { left: 4vw; right: 4vw; top: auto; bottom: 3svh; translate: none; width: auto; }
+  .site-body { padding: 14px 16px 16px; }
+  .site-did, .tag-parts { display: none; }
+  .tag { padding: 36px 16px 14px; rotate: 0deg; }
+  .tag-can ul { font-size: 11px; gap: 5px 10px; }
   .hw-anchor { top: 46%; }
   /* the parts sit right of centre, so on a phone the label hangs to the left of its dot */
   .callout { flex-direction: column; align-items: flex-end; translate: calc(-100% + 15px) -15px; }
@@ -576,9 +623,10 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
   .folder-tab { height: 9svh; padding: 0 2vw; font-size: 15px; flex-direction: column; gap: 4px; }
   .folder-n { font-size: 10px; padding: 3px 6px; }
   .folder-body { grid-template-columns: 1fr; gap: 3svh; padding: 4svh 6vw 0; }
-  .folder-copy { padding: 0; font-size: 15px; }
+  .folder-copy { padding: 0; font-size: 16px; }
   .folder-copy p { margin-bottom: 0.8em; }
-  .folder-lead { font-size: 22px; }
+  .folder-lead { font-size: 28px; }
+  .folder-close { font-size: 19px; }
   .bg-title { top: 12svh; }
   .tangle { top: 55%; }
   .inside-note { left: 6vw; right: 6vw; top: auto; bottom: 4svh; width: auto; }

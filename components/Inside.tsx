@@ -131,11 +131,8 @@ function Board() {
       <rect x={MCU.x} y={MCU.y} width={MCU.w} height={MCU.h} rx="16" className="ln f-ink" strokeWidth="5" />
       {pins(MCU.x + 18, MCU.y - 14, 12, 20, 10, 14)}
       {pins(MCU.x + 18, MCU.y + MCU.h, 12, 20, 10, 14)}
-      <text x="500" y="378" textAnchor="middle" className="board-name">
+      <text x="500" y="394" textAnchor="middle" className="board-name">
         {STUDIO}
-      </text>
-      <text x="500" y="420" textAnchor="middle" className="silk">
-        TWO PEOPLE · BENGALURU
       </text>
       {CHIPS.map((c, i) => (
         <g key={INSIDE[i].chip}>

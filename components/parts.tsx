@@ -23,7 +23,7 @@ export function FloppyDisk() {
       <path d="M14 94V48Q14 44 18 44H72Q76 44 76 48V94" className="ln f-paper" strokeWidth="1.2" />
       <path d="M22 62H68M22 72H68M22 82H56" className="s-lavender" strokeWidth="1.2" strokeLinecap="round" />
       <text x="45" y="56.5" textAnchor="middle" className="disk-label">
-        thelocalcode
+        thefaber
       </text>
       <path d={rr(4, 85, 5, 5, 0.8)} className="f-ink" />
       <path d={rr(81, 85, 5, 5, 0.8)} className="f-ink" />
