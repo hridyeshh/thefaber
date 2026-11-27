@@ -2,8 +2,8 @@
 
 import { useActionState } from "react";
 import { type SendState, sendContact } from "@/app/actions";
-import { NEEDS } from "@/lib/contact";
-import { STUDIO } from "@/lib/content";
+import { NEEDS, TALK } from "@/lib/contact";
+import { EMAIL, PHONE, STUDIO } from "@/lib/content";
 
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
@@ -24,12 +24,20 @@ export function Contact() {
               you&apos;re <em>building</em>.
             </span>
           </h2>
-          <p>Pricing depends on what you need, so let&apos;s talk first. Send a few lines here or message us on WhatsApp.</p>
-          {whatsapp && (
-            <a className="btn btn-mint" href={whatsapp} target="_blank" rel="noopener">
-              Chat on WhatsApp
+          <p>Pricing depends on what you need, so let&apos;s talk first. Book a call or a Google Meet with the form, or reach us directly.</p>
+          <div className="contact-links">
+            <a className="btn btn-mint" href={`tel:${PHONE.replace(/\s/g, "")}`}>
+              Call {PHONE}
             </a>
-          )}
+            <a className="btn btn-paper" href={`mailto:${EMAIL}`}>
+              {EMAIL}
+            </a>
+            {whatsapp && (
+              <a className="btn btn-paper" href={whatsapp} target="_blank" rel="noopener">
+                Chat on WhatsApp
+              </a>
+            )}
+          </div>
         </div>
         {/* The form, as a window on the computer from the story. */}
         <div className="window">
@@ -48,17 +56,8 @@ export function Contact() {
                 <input name="reach" required maxLength={120} autoComplete="email" />
               </label>
             </div>
-            <fieldset className="field">
-              <legend>What do you need?</legend>
-              <div className="needs">
-                {NEEDS.map((n, i) => (
-                  <label key={n} className="need">
-                    <input type="radio" name="need" value={n} defaultChecked={i === 0} />
-                    <span>{n}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <Chips legend="How should we talk?" name="talk" options={TALK} />
+            <Chips legend="What do you need?" name="need" options={NEEDS} />
             <label className="field">
               <span>About the project</span>
               <textarea name="message" required minLength={10} maxLength={2000} rows={5} placeholder="A few lines is plenty." />
@@ -90,5 +89,22 @@ export function Contact() {
         </div>
       </div>
     </footer>
+  );
+}
+
+/** One pick from a row of pill radios, the first picked to start. */
+function Chips({ legend, name, options }: { legend: string; name: string; options: readonly string[] }) {
+  return (
+    <fieldset className="field">
+      <legend>{legend}</legend>
+      <div className="needs">
+        {options.map((o, i) => (
+          <label key={o} className="need">
+            <input type="radio" name={name} value={o} defaultChecked={i === 0} />
+            <span>{o}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
   );
 }

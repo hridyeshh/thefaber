@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Fraunces, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
+import { EMAIL, PHONE, SITE } from "@/lib/content";
 import "./globals.css";
 
 // Fraunces with its soft corners for display (warm, a little retro, like the computer);
@@ -13,7 +14,7 @@ const description =
   "Websites and internet branding for founders and local businesses, from a studio that ships real products: web apps, a browser extension and hardware.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(SITE),
   title: "thefaber — websites and branding",
   description,
   openGraph: { title: "thefaber", description, images: ["/art/mac.webp"] },
@@ -24,6 +25,9 @@ const LD = {
   "@type": "ProfessionalService",
   name: "thefaber",
   description,
+  url: SITE,
+  email: EMAIL,
+  telephone: PHONE,
   areaServed: "IN",
 };
 

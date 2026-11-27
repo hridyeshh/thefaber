@@ -546,6 +546,7 @@ p:has(> .tape) + p:has(> .tape) .tape, br + .tape { rotate: 0.8deg; }
 .contact-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 6vw; align-items: start; max-width: 1240px; margin: 0 auto; }
 .contact-title { margin: 0 0 22px; }
 .contact-intro > p:not(.eyebrow) { max-width: 420px; margin: 0 0 24px; font-size: 17px; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
 .window { background: var(--paper); border: var(--line); border-radius: 14px; box-shadow: 8px 8px 0 var(--ink); overflow: hidden; }
 .window-bar {
   position: relative; display: flex; align-items: center; justify-content: center; height: 42px; margin: 0;

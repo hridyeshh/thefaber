@@ -1,12 +1,14 @@
 "use server";
 
 import { parseContact, toRow } from "@/lib/contact";
+import { EMAIL, PHONE } from "@/lib/content";
 
 export type SendState = { status: "idle" | "sent" | "error"; message?: string };
 
-const FALLBACK = "Couldn't send that right now. WhatsApp us instead.";
+const FALLBACK = `Couldn't send that right now. Call ${PHONE} or email ${EMAIL}.`;
 
-// Each enquiry lands as a row in our Google Sheet, through the Apps Script in scripts/contact-sheet.gs.
+// Each enquiry lands as a row in our Google Sheet and as an email to team@, through the Apps Script in
+// scripts/contact-sheet.gs.
 export async function sendContact(_prev: SendState, form: FormData): Promise<SendState> {
   const parsed = parseContact(form);
   if ("spam" in parsed) return { status: "sent" }; // don't tell bots they were caught

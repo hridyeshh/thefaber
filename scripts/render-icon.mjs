@@ -13,7 +13,7 @@ const mac = (size) => {
       <span style="font:600 ${w * 0.215}px/1 Fraunces,Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 1;letter-spacing:-0.02em;color:#141210;translate:0 -4%">faber</span>
     </div></div>`;
 };
-const tile = (size, bg) => `<div style="width:${size}px;height:${size}px;display:grid;place-items:center;background:${bg}">${mac(size * (bg === "transparent" ? 1 : 0.8))}</div>`;
+const tile = (size, bg, fill = bg === "transparent" ? 1 : 0.8) => `<div style="width:${size}px;height:${size}px;display:grid;place-items:center;background:${bg}">${mac(size * fill)}</div>`;
 const b = await chromium.launch({ channel: "chrome" });
 const go = async (w, h, body, out, omit) => {
   const p = await b.newPage({ viewport: { width: w, height: h } });
@@ -25,6 +25,8 @@ const go = async (w, h, body, out, omit) => {
 if (process.argv[2] === "final") {
   await go(512, 512, tile(512, "transparent"), `${root}/app/icon.png`, true);
   await go(180, 180, tile(180, "#eebf12"), `${root}/app/apple-icon.png`, false);
+  // The Twitter/Instagram profile picture. Both crop it to a circle, so the computer stays well inside one.
+  await go(1080, 1080, tile(1080, "#eebf12", 0.72), `${root}/brand/thefaber-profile.png`, false);
 } else {
   await go(560, 300, `<div style="display:flex;gap:16px;align-items:end;padding:16px;background:#fff">${tile(256, "transparent")}${tile(64, "transparent")}${tile(32, "transparent")}<div style="background:#202124;padding:8px;display:flex;gap:8px;align-items:end">${tile(64, "transparent")}${tile(32, "transparent")}</div></div>`, "heromac.png", false);
 }

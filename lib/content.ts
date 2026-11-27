@@ -1,6 +1,11 @@
 // Every word on the site lives here. Edit copy here, not in the components.
 
 export const STUDIO = "thefaber";
+export const SITE = "https://thefaber.in";
+
+// Straight to us. Form enquiries also land in the sheet and in this inbox (scripts/contact-sheet.gs).
+export const PHONE = "+91 81302 52611";
+export const EMAIL = "team@thefaber.in";
 
 /** The line the camera dives into on the computer's screen, and Desky's chapter opens on. */
 export const INTRO = "Here's what we've built";
